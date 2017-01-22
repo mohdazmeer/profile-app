@@ -1,0 +1,43 @@
+<section>
+    <div>
+        <div class="input-group">
+            <div class="input-group-addon"> <span class="glyphicon glyphicon-search"></span> </div>
+            <input type="text" class="form-control" ng-model="name" placeholder="Search for profiles" aria-describedby="basic-addon1" /> </div>
+        <!--
+                        <label>
+                            <select ng-model="nameOrder">
+                                <option value="full_name">Name</option>
+                                <option value="['hometown.country']">Country</option>
+                                <option value="['hometown.state']">State</option>
+                            </select>
+                        </label>
+                    -->
+    </div>
+    <!--div>
+                    <input ng-model="order" type="radio" name="order" checked />
+                    <input ng-model="order" type="radio" name="order" checked value="reverse" /> </div>
+                <div-->
+    <br/>
+    <br/>
+    <div>
+        <div class="row" ng-repeat="profile in profiles | filter: name | orderBy: nameOrder: order">
+            <div class="col-md-12">
+                <div class="row alert alert-info" role="alert">
+                    <div class="col-md-2"><img class="profile-picture rounded" src="https://randomuser.me/api/portraits/men/{{profile.id}}.jpg"></div>
+                    <div class="col-md-10"> <strong>Name</strong>
+                        <p class="text-muted">{{profile.full_name}}</p> <strong>Location</strong>
+                        <p class="text-muted"> {{profile['hometown.country']}}
+                            <br/> {{profile['hometown.state']}}
+                            <br/> {{profile['hometown.city']}} </p>                        
+                        <a class="btn btn-default" href="index.html#!/details/{{profiles.indexOf(profile)}}" role="button">Location</a>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-md-6">
+                            <ng-map zoom="11" center="[{{profile.lat}}, {{profile.lng}}]">
+                                <marker position="[{{profile.lat}}, {{profile.lng}}]" />
+                                <shape name="circle" radius="400" center="[{{profile.lat}}, {{profile.lng}}]" radius="4000" />
+                                <control name="overviewMap" opened="true" /> </ng-map>
+                        </div>--></div>
+    </div>
+</section>
