@@ -5,9 +5,10 @@
                 <div class="col-md-2"><img class="profile-picture rounded" src="https://randomuser.me/api/portraits/men/{{profiles[indexId].id}}.jpg"></div>
                 <div class="col-md-10"> <strong>Name</strong>
                     <p class="text-muted">{{profiles[indexId].full_name}}</p> <strong>Location</strong>
-                    <p class="text-muted"> {{profiles[indexId]['hometown.country']}}
-                        <br/> {{profiles[indexId]['hometown.state']}}
-                        <br/> {{profiles[indexId]['hometown.city']}} </p>  </div>
+                    <p class="text-muted"> {{profiles[indexId].hometown_country}}
+                        <br/> {{profiles[indexId].hometown_state}}
+                        <br/> {{profiles[indexId].hometown_city}} </p>
+                </div>
             </div>
         </div>
         <div>
@@ -16,6 +17,8 @@
                 <shape name="circle" radius="400" center="[{{profiles[indexId].lat}}, {{profiles[indexId].lng}}]" radius="4000" />
                 <control name="overviewMap" opened="true" /> </ng-map>
         </div>
-        <a class="btn btn-default" href="#/list" role="button">Back</a>
+        <br/>
+        <a class="btn btn-default" href="index.html#!/list" role="button">
+            <span class="glyphicon glyphicon-menu-hamburger"></span> Back To List</a>
     </div>
 </section>

@@ -1,43 +1,53 @@
 <section>
-    <div>
-        <div class="input-group">
-            <div class="input-group-addon"> <span class="glyphicon glyphicon-search"></span> </div>
-            <input type="text" class="form-control" ng-model="name" placeholder="Search for profiles" aria-describedby="basic-addon1" /> </div>
-        <!--
-                        <label>
-                            <select ng-model="nameOrder">
-                                <option value="full_name">Name</option>
-                                <option value="['hometown.country']">Country</option>
-                                <option value="['hometown.state']">State</option>
-                            </select>
-                        </label>
-                    -->
-    </div>
-    <!--div>
-                    <input ng-model="order" type="radio" name="order" checked />
-                    <input ng-model="order" type="radio" name="order" checked value="reverse" /> </div>
-                <div-->
-    <br/>
-    <br/>
-    <div>
-        <div class="row" ng-repeat="profile in profiles | filter: name | orderBy: nameOrder: order">
-            <div class="col-md-12">
-                <div class="row alert alert-info" role="alert">
-                    <div class="col-md-2"><img class="profile-picture rounded" src="https://randomuser.me/api/portraits/men/{{profile.id}}.jpg"></div>
-                    <div class="col-md-10"> <strong>Name</strong>
-                        <p class="text-muted">{{profile.full_name}}</p> <strong>Location</strong>
-                        <p class="text-muted"> {{profile['hometown.country']}}
-                            <br/> {{profile['hometown.state']}}
-                            <br/> {{profile['hometown.city']}} </p>                        
-                        <a class="btn btn-default" href="index.html#!/details/{{profiles.indexOf(profile)}}" role="button">Location</a>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="input-group">
+                <div class="input-group-addon"> <span class="glyphicon glyphicon-search"></span> </div>
+                <input type="text" class="form-control input-sm" ng-model="query" placeholder="Search for profiles" aria-describedby="basic-addon1" />
             </div>
-            <!--<div class="col-md-6">
-                            <ng-map zoom="11" center="[{{profile.lat}}, {{profile.lng}}]">
-                                <marker position="[{{profile.lat}}, {{profile.lng}}]" />
-                                <shape name="circle" radius="400" center="[{{profile.lat}}, {{profile.lng}}]" radius="4000" />
-                                <control name="overviewMap" opened="true" /> </ng-map>
-                        </div>--></div>
+        </div>
+        <div class="col-md-2 text-muted">
+            Sort By :
+            <label>
+                <select ng-model="nameOrder" class="form-control input-sm">
+                    <option value="full_name">Name</option>
+                    <option value="['hometown_country']">Country</option>
+                </select>
+            </label>
+        </div>
+        <div class="col-md-2 text-muted">
+            <label class="checkbox-inline">
+                <input ng-model="order" type="radio" name="order" checked /> Asc
+            </label>
+            <label class="checkbox-inline">
+                <input ng-model="order" type="radio" name="order" value="reverse" /> Desc
+            </label>
+        </div>
     </div>
+    <br/>
+    <ul class="text-muted">
+        <li ng-repeat="(key, value) in profiles  | filter: query  | orderBy: nameOrder: order | groupBy: 'hometown_country'">
+            <strong>Country</strong>: {{ key }}
+            <ul style="padding-top: 10px;">
+                <li ng-repeat="(key, value) in value  | filter: query  | orderBy: nameOrder: order | groupBy: 'hometown_state'">
+                    <strong>State</strong>: {{ key }}
+                    <ul style="padding-top: 10px; list-style: none;">
+                        <li ng-repeat="profile in value">
+                            <div class="row alert alert-info" role="alert">
+                                <div class="col-md-2"><img class="profile-picture rounded" ng-src="https://randomuser.me/api/portraits/men/{{profile.id}}.jpg"></div>
+                                <div class="col-md-10"> <strong>Name</strong>
+                                    <p class="text-muted">{{profile.full_name}}</p> <strong>City</strong>
+                                    <p class="text-muted">{{profile.hometown_city}}
+                                        <a class="btn btn-default btn-xs " href="index.html#!/details/{{profiles.indexOf(profile)}}" role="button">
+                                            <span class="glyphicon glyphicon-globe"></span> Map</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </section>
